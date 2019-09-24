@@ -1,24 +1,61 @@
 #include<stdio.h>
+#include<stdlib.h>
+typedef int Position;
+typedef struct SNode*PtrToSNode;
+struct SNode{
+    int *Data;
+    Position Top;
+    int MaxSize;
+};
 
+typedef PtrToSNode Stack;
 int main()
 {
-//    int p;
-//    int *i;
-//    i=&p;
-//    p = 100;
-//    printf("%d\n",p);
-//    printf("%x\n",i);
-//    printf("%x\n",&i);
-    int i = 2,ii = 3;
-    int *p1 = &i;
-    int *p2 = p1;
-    printf("i = %p   ii = %p\n",&i,&ii);
-    printf("%p\n",p1);
-    printf("%p\n",p2);
-    int *p3 = p1;
-    p3 = &ii;
-    *p3 = 5;
-    printf("%d %d\n",*p3,ii);
-    printf("%p %p\n",p3,&ii);
-    return 0;
+    int x;
+    bool IsFull(Stack S);
+    bool Push(Stack S, int x);
+    bool IsEmpty(Stack S);
+    int Pop(Stack S);
+    Stack CreateStack(int MaxSize);
+}
+
+Stack CreateStack(int MaxSize)
+{
+    Stack S=(Stack)malloc(sizeof(struct SNode));
+    S->Data=(int*)malloc(MaxSize*sizeof(int));
+    S->Top=-1;
+    S->MaxSize=10;
+    return S;
+}
+
+bool IsFull(Stack S)
+{
+    return (S->Top==S->MaxSize-1);
+}
+bool Push(Stack S, int x)
+{
+    if(IsFull(S))
+    {
+        printf("ddd");
+    }
+    else{
+        S->Data[++(S->Top)]=x          ;
+        return true;
+    }
+}
+
+bool IsEmpty(Stack S)
+{
+    return(S->Top==-1);
+}
+int Pop(Stack S)
+{
+    if(IsEmpty(S))
+    {
+        printf("ddd");
+        return ERROR;
+    }
+    else{
+        return(S->Data[(S->Top)--]);
+    }
 }
